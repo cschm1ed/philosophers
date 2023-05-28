@@ -34,13 +34,13 @@ int	info_init(int argc, char **argv, t_info *info)
 		|| pthread_mutex_init(&info->times_eaten_lock, NULL) != 0
 		|| pthread_mutex_init(&info->finished_lock, NULL) != 0)
 		return (perror("mutex_init"), FAILURE);
+	pthread_mutex_lock(&info->start_lock);
 	if (info->num_philos == -1 || info->time_to_die == -1
 		|| info->time_to_eat == -1 || info->time_to_sleep == -1)
 		return (ft_putstr(ERROR_INPUT), FAILURE);
 	info->locks = ft_calloc(sizeof(pthread_mutex_t), info->num_philos);
 	if (!info->locks)
 		return (perror("malloc"), FAILURE);
-	pthread_mutex_lock(&info->start_lock);
 	if (create_locks(info) == FAILURE || philos_init(info) == FAILURE)
 		return (FAILURE);
 	return (SUCCESS);

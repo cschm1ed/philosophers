@@ -17,8 +17,12 @@ void	free_info(t_info *info)
 	int i;
 
 	i = 0;
+	pthread_mutex_destroy(&info->finished_lock);
+	pthread_mutex_destroy(&info->times_eaten_lock);
+	pthread_mutex_destroy(&info->start_lock);
+	pthread_mutex_destroy(&info->print_lock);
+	// while (i < info->num_philos)
+	//	pthread_mutex_destroy(&info->locks[i++]);
 	free(info->philos);
-	while (i < info->num_philos)
-		pthread_mutex_destroy(&info->locks[i++]);
 	free(info->times_eaten);
 }

@@ -20,6 +20,12 @@
 # define USAGE "Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n"
 # define ERROR_INPUT "ERROR: argument must be positive integer.\n"
 
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define FORK "has taken a fork"
+# define THINK "is thinking"
+# define DIED "died"
+
 # define WAIT_INTERVAL 10
 
 # include <pthread.h>

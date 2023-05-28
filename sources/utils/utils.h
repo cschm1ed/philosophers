@@ -24,13 +24,8 @@ void	*ft_calloc(int count, int size);
 long	gettime(t_info *info);
 void	free_info(t_info *info);
 
+void	print_message(t_info *info, const char *msg, char* color, int pos);
 
-// messages
-void	print_eating(t_info *info, int num);
-void	print_sleeping(t_info *info, int num);
-void	print_thinking(t_info *info, int num);
-void	print_died(t_info *info, int num);
-void	print_taken_fork(t_info *info, int num);
 
 
 #endif

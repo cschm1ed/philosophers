@@ -57,7 +57,7 @@ static int	check_times_eaten(t_info *info)
 			return (FALSE);
 		i ++;
 	}
-	pthread_mutex_lock(&info->times_eaten_lock);
+	pthread_mutex_unlock(&info->times_eaten_lock);
 	return (TRUE);
 }
 
@@ -75,7 +75,8 @@ static int	check_dead(t_info *info)
 			pthread_mutex_lock(&info->finished_lock);
 			info->died = TRUE;
 			pthread_mutex_unlock(&info->finished_lock);
-			print_died(info, i);
+			print_message(info, DIED, RED, i);
+			pthread_mutex_unlock(&info->times_eaten_lock);
 			return (TRUE);
 		}
 		i ++;
@@ -89,7 +90,6 @@ static void	end_game(t_info *info)
 	int i;
 
 	i = 0;
-	info->died = TRUE;
 	while (i < info->num_philos)
 	{
 		pthread_detach(info->philos[i].thread);
