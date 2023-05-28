@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gettime.c                                          :+:      :+:    :+:   */
+/*   free_resources.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: cschmied <cschmied@student.42wolfsburg.d>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/22 16:04:02 by cschmied          #+#    #+#             */
-/*   Updated: 2023/04/22 17:24:27 by cschmied         ###   ########.fr       */
+/*   Created: 2023/05/28 16:40:06 by cschmied          #+#    #+#             */
+/*   Updated: 2023/05/28 16:40:06 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include <philo.h>
 
-int	gettime(int starttime)
+void	free_info(t_info *info)
 {
-	struct timeval	time;
+	int i;
 
-	gettimeofday(&time, NULL);
-	return ((time.tv_sec * 1000 + time.tv_usec / 1000) - starttime);
+	i = 0;
+	free(info->philos);
+	while (i < info->num_philos)
+		pthread_mutex_destroy(&info->locks[i++]);
+	free(info->times_eaten);
 }

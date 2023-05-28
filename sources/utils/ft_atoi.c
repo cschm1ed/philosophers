@@ -15,67 +15,38 @@
 static int	iswhitespace(const char c)
 {
 	return (c == ' ' || c == '\n' || c == '\t'
-		|| c == '\r' || c == '\f' || c == '\v');
+			|| c == '\r' || c == '\f' || c == '\v');
 }
 
-static int	smaller_int_max(const char *str)
+static int ft_isdigit(const char c)
 {
-	char	max[11] = "2147483647";
-	int		i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] > max[i])
-			return (0);
-		i ++;
-	}
-	return (1);
-}
-
-static int	ispositiveint(const char *str)
-{
-	int	i;
-	int	cp;
-
-	cp = 0;
-	i = 0;
-	while (str[i])
-	{
-		if (!iswhitespace(str[i]) && (str[i] < '0' && str[i] > '9')
-			&& str[i] != '+')
-			return (0);
-		if (str[i] == '+')
-		{
-			cp ++;
-			if (cp > 1)
-				return (0);
-		}
-		i ++;
-	}
-	i = 0;
-	while (iswhitespace(str[i]))
-		i ++;
-	return (smaller_int_max(str + i));
+	return (c >= '0' && c <= '9');
 }
 
 int	ft_atoi(const char *str)
 {
-	int	sum;
-	int	multiplier;
+	long long	sum;
 	int	i;
 
 	i = 0;
 	sum = 0;
-	multiplier = 1;
-	if (!ispositiveint(str))
-		return (-1);
-	while (str[i])
+	while (iswhitespace(str[i]))
 		i++;
-	while (--i >= 0)
+	if (str[i] == '+' || str[i] == '-')
 	{
-		sum += (str[i] - '0') * multiplier;
-		multiplier *= 10;
+		if (str[i] == '-')
+			return (-1);
+		i++;
 	}
-	return (sum);
+	while (ft_isdigit(str[i]))
+	{
+		sum = sum * 10 + (str[i] - '0');
+		if (sum > INT_MAX)
+			return (-1);
+		i++;
+	}
+	if (str[i] != '\0')
+		return (-1);
+	return ((int)sum);
 }
+
