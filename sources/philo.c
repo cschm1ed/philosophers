@@ -17,8 +17,12 @@ static void	try_eat_then_sleep(t_philo *self);
 void	*philo(void *arg)
 {
 	t_philo	*self;
+	char	c;
+
 
 	self = (t_philo *)arg;
+	c = self->pos + '0';
+	usleep(10 * self->pos); // bullshit
 	pthread_mutex_lock(&self->info->start_lock);
 	pthread_mutex_unlock(&self->info->start_lock);
 	pthread_mutex_lock(&self->info->finished_lock);
