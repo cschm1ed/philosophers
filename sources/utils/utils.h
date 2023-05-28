@@ -15,6 +15,12 @@
 
 # include <philo.h>
 
+# define EAT "is eating"
+# define SLEEP "is sleeping"
+# define FORK "has taken a fork"
+# define THINK "is thinking"
+# define DIED "died"
+
 int		ft_putstr(const char *str);
 int		ft_atoi(const char *str);
 int		info_init(int argc, char **argv, t_info *info);
@@ -24,8 +30,6 @@ void	*ft_calloc(int count, int size);
 long	gettime(t_info *info);
 void	free_info(t_info *info);
 
-void	print_message(t_info *info, const char *msg, char* color, int pos);
-
-
+void	print_message(t_info *info, const char *msg, char *color, int pos);
 
 #endif

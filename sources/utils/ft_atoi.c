@@ -15,10 +15,10 @@
 static int	iswhitespace(const char c)
 {
 	return (c == ' ' || c == '\n' || c == '\t'
-			|| c == '\r' || c == '\f' || c == '\v');
+		|| c == '\r' || c == '\f' || c == '\v');
 }
 
-static int ft_isdigit(const char c)
+static int	ft_isdigit(const char c)
 {
 	return (c >= '0' && c <= '9');
 }
@@ -26,7 +26,7 @@ static int ft_isdigit(const char c)
 int	ft_atoi(const char *str)
 {
 	long long	sum;
-	int	i;
+	int			i;
 
 	i = 0;
 	sum = 0;
@@ -49,4 +49,3 @@ int	ft_atoi(const char *str)
 		return (-1);
 	return ((int)sum);
 }
-

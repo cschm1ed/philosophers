@@ -10,9 +10,9 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/philo.h"
+#include "../../includes/philo.h"
 
-long gettime(t_info *info)
+long	gettime(t_info *info)
 {
 	struct timeval	time;
 

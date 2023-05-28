@@ -20,7 +20,7 @@ SRCS		:= main.c philo.c info_init.c ft_gettime.c $(UTILS)
 
 OBJS		:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
-CFLAGS		:= -Wall -Werror -Wextra -O2 -g -I ./includes
+CFLAGS		:= -Wall -Werror -Wextra -O2 -g -I ./includes -fsanitize=thread
 
 LDFLAGS		:= $(CFLAGS) -lpthread -g -I ./includes
 

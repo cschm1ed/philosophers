@@ -10,13 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <philo.h>
+#include <philo.h>
 
-void ft_wait(long to_wait)
+void	ft_wait(long to_wait)
 {
 	struct timeval	tv;
 	long			start;
-	long 			current;
+	long			current;
 
 	gettimeofday(&tv, NULL);
 	start = tv.tv_usec / 1000 + tv.tv_sec * 1000;

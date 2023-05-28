@@ -12,14 +12,14 @@
 
 #include <philo.h>
 
-static long get_starttime(void);
+static long	get_starttime(void);
 static int	check_dead(t_info *info);
 static int	check_times_eaten(t_info *info);
 static void	end_game(t_info *info);
 
-int main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
-	t_info		info;
+	t_info	info;
 
 	if (info_init(argc, argv, &info) == FAILURE)
 		return (1);
@@ -37,7 +37,7 @@ int main(int argc, char **argv)
 	return (SUCCESS);
 }
 
-static long get_starttime(void)
+static long	get_starttime(void)
 {
 	struct timeval	tv;
 
@@ -47,7 +47,7 @@ static long get_starttime(void)
 
 static int	check_times_eaten(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_lock(&info->times_eaten_lock);
@@ -63,7 +63,7 @@ static int	check_times_eaten(t_info *info)
 
 static int	check_dead(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	pthread_mutex_lock(&info->times_eaten_lock);
@@ -87,7 +87,7 @@ static int	check_dead(t_info *info)
 
 static void	end_game(t_info *info)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < info->num_philos)
