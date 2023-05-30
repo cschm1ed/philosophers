@@ -17,12 +17,8 @@ static void	try_eat_then_sleep(t_philo *self);
 void	*philo(void *arg)
 {
 	t_philo	*self;
-	char	c;
-
 
 	self = (t_philo *)arg;
-	c = self->pos + '0';
-	usleep(10 * self->pos); // bullshit
 	pthread_mutex_lock(&self->info->start_lock);
 	pthread_mutex_unlock(&self->info->start_lock);
 	pthread_mutex_lock(&self->info->finished_lock);
@@ -47,6 +43,11 @@ void	*philo(void *arg)
 
 static void	try_eat_then_sleep(t_philo *self)
 {
+	if (self->info->num_philos % 2 == 0 && self->pos == 0 && self->time_last_eaten == 0)
+	{
+		print_message(self->info, THINK, YELLOW, self->pos);
+		ft_wait(self->info->time_to_eat * 0.9);
+	}
 	if (self->pos % 2 == 1)
 	{
 		pthread_mutex_lock(self->right_fork);
@@ -59,7 +60,7 @@ static void	try_eat_then_sleep(t_philo *self)
 		pthread_mutex_lock(self->left_fork);
 		print_message(self->info, FORK, CYAN, self->pos);
 		pthread_mutex_lock(self->right_fork);
-		print_message(self->info, FORK, CYAN, self->pos);
+		print_message(self->info, FORK, CYAN, self->pos);	
 	}
 	print_message(self->info, EAT, GREEN, self->pos);
 	ft_wait(self->info->time_to_eat);

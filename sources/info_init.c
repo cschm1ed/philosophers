@@ -19,6 +19,7 @@ static int	create_shared_locks(t_info *info);
 
 int	info_init(int argc, char **argv, t_info *info)
 {
+	info->died = FALSE;
 	if (read_input(argc, argv, info) == FAILURE)
 		return (FAILURE);
 	if (create_shared_locks(info) == FAILURE)

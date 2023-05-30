@@ -20,9 +20,9 @@ SRCS		:= main.c philo.c info_init.c ft_gettime.c $(UTILS)
 
 OBJS		:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
-CFLAGS		:= -Wall -Werror -Wextra -g -I ./includes -fsanitize=thread
+CFLAGS		:= -Wall -Werror -Wextra -g -I ./includes
 
-LDFLAGS		:= $(CFLAGS) -lpthread -g -I ./includes -fsanitize=thread
+LDFLAGS		:= $(CFLAGS) -lpthread -g -I ./includes
 
 NAME		:= philo
 
@@ -51,7 +51,7 @@ all: $(NAME)
 re: fclean all
 
 test: re
-	./$(NAME) 10 10 10 10
+	./$(NAME) 4 410 200 200
 
 valgrind: $(NAME)
 	valgrind -s --leaks-check=full --track-origin=yes ./philo 10 50 5 10
