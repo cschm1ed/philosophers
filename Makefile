@@ -11,16 +11,18 @@
 # **************************************************************************** #
 
 VPATH		:= sources:sources/utils
+BUILDDIR	:= build
 
-UTILS		:= ft_putstr.c ft_atoi.c ft_calloc.c
+UTILS		:= ft_putstr.c ft_atoi.c ft_calloc.c ft_wait.c print_messages.c \
+				free_resources.c
 
-SRCS		:= philo.c info_init.c gettime.c $(UTILS)
+SRCS		:= main.c philo.c info_init.c ft_gettime.c $(UTILS)
 
-OBJS		:= $(SRCS:.c=.o)
+OBJS		:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
-CFLAGS		:= -Wall -Werror -Wextra -O2 -g
+CFLAGS		:= -Wall -Werror -Wextra -g -I ./includes
 
-LDFLAGS		:= $(CFLAGS) -lpthread
+LDFLAGS		:= $(CFLAGS) -lpthread -g -I ./includes
 
 NAME		:= philo
 
@@ -29,13 +31,17 @@ CC			:= cc
 $(NAME): $(OBJS)
 	$(CC) $(LDFLAGS) $^ -o $@
 
-%.o: %.c
+$(BUILDDIR)/%.o: %.c $(BUILDDIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: clean fclean re all valgrind
+$(BUILDDIR):
+	@mkdir $(BUILDDIR)
+
+.PHONY: clean fclean re all valgrind test
 
 clean:
-	rm -f $(OBJS)
+	@rm -f $(OBJS)
+	@rm -rf $(BUILDDIR)
 
 fclean: clean
 	rm -f $(NAME)
@@ -43,6 +49,9 @@ fclean: clean
 all: $(NAME)
 
 re: fclean all
+
+test: re
+	./$(NAME) 4 410 200 200
 
 valgrind: $(NAME)
 	valgrind -s --leaks-check=full --track-origin=yes ./philo 10 50 5 10

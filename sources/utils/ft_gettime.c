@@ -3,21 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   ft_gettime.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cschmied <cschmied@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/20 19:21:32 by cschmied          #+#    #+#             */
-/*   Updated: 2023/05/20 19:21:32 by cschmied         ###   ########.fr       */
+/*   Created: 2023/04/22 16:04:02 by cschmied          #+#    #+#             */
+/*   Updated: 2023/04/22 17:24:27 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <philo.h>
+#include "../../includes/philo.h"
 
-unsigned int ft_gettime(t_info *info)
+long	gettime(t_info *info)
 {
-	unsigned int time;
-	struct timeval	tp;
+	struct timeval	time;
 
-	gettimeofday(&tp, NULL);
-	time = tp.tv_usec / 1000 + tp.tv_sec * 1000;
-	return (time - info->starttime);
+	gettimeofday(&time, NULL);
+	return ((time.tv_sec * 1000 + time.tv_usec / 1000) - info->starttime);
 }
