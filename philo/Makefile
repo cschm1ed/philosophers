@@ -13,14 +13,14 @@
 VPATH		:= sources:sources/utils
 BUILDDIR	:= build
 
-UTILS		:= ft_putstr.c ft_atoi.c ft_calloc.c ft_wait.c print_messages.c \
-				free_resources.c
+UTILS		:= ft_atoi.c ft_calloc.c ft_wait.c print_messages.c \
+				free_resources.c ft_isint.c
 
-SRCS		:= main.c philo.c info_init.c ft_gettime.c $(UTILS)
+SRCS		:= main.c philo.c info_init.c ft_gettime.c check_state.c $(UTILS)
 
 OBJS		:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
-CFLAGS		:= -Wall -Werror -Wextra -g -I ./includes
+CFLAGS		:= -Wall -Werror -Wextra -g  -I ./includes
 
 LDFLAGS		:= $(CFLAGS) -lpthread -g -I ./includes
 
@@ -54,4 +54,4 @@ test: re
 	./$(NAME) 4 410 200 200
 
 valgrind: $(NAME)
-	valgrind -s --leaks-check=full --track-origin=yes ./philo 10 50 5 10
+	valgrind -s --leak-check=full --show-leak-kinds=all --track-origins=yes ./philo 1 400 210 200
