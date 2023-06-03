@@ -21,7 +21,7 @@
 # define THINK "is thinking"
 # define DIED "died"
 
-int		ft_putstr(const char *str);
+int		ft_isint(char *str);
 int		ft_atoi(const char *str);
 int		info_init(int argc, char **argv, t_info *info);
 void	ft_wait(long to_wait);
