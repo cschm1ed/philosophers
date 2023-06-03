@@ -12,7 +12,7 @@
 
 #include <philo.h>
 
-void	print_message(t_info *info, const char *msg, char* color, int pos)
+void	print_message(t_info *info, const char *msg, char *color, int pos)
 {
 	pthread_mutex_lock(&info->finished_lock);
 	if (info->died == FALSE || *msg == 'd')
