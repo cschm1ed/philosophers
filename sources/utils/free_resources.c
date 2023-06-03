@@ -18,11 +18,14 @@ void	free_info(t_info *info)
 
 	i = 0;
 	pthread_mutex_destroy(&info->finished_lock);
-	pthread_mutex_destroy(&info->times_eaten_lock);
 	pthread_mutex_destroy(&info->start_lock);
 	pthread_mutex_destroy(&info->print_lock);
-	// while (i < info->num_philos)
-	//	pthread_mutex_destroy(&info->locks[i++]);
+	while (i < info->num_philos)
+	{
+		pthread_mutex_destroy(&info->philos[i].count_eaten_lock);
+		pthread_mutex_destroy(&info->philos[i].time_last_eaten_lock);
+		pthread_mutex_destroy(&info->locks[i++]);
+	}
+	free(info->count_eaten);
 	free(info->philos);
-	free(info->times_eaten);
 }

@@ -3,18 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cschmied <cschmied@student.42wolfsburg.d>  +#+  +:+       +#+        */
+/*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/28 16:24:31 by cschmied          #+#    #+#             */
-/*   Updated: 2023/05/28 16:24:31 by cschmied         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:19:26 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <philo.h>
 
 static long	get_starttime(void);
-static int	check_dead(t_info *info);
-static int	check_times_eaten(t_info *info);
 static void	end_game(t_info *info);
 
 int	main(int argc, char **argv)
@@ -27,10 +25,9 @@ int	main(int argc, char **argv)
 	pthread_mutex_unlock(&info.start_lock);
 	while (1)
 	{
-		if (check_dead(&info) == TRUE
-			|| (argc > 5 && check_times_eaten(&info) == TRUE))
+		if (check_state(&info) == TRUE)
 			break ;
-		usleep(100);
+		usleep(10);
 	}
 	join_threads(&info);
 	end_game(&info);
@@ -43,46 +40,6 @@ static long	get_starttime(void)
 
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000 + tv.tv_usec / 1000);
-}
-
-static int	check_times_eaten(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	pthread_mutex_lock(&info->times_eaten_lock);
-	while (i < info->num_philos)
-	{
-		if (info->times_eaten[i] != info->times_to_eat)
-			return (FALSE);
-		i ++;
-	}
-	pthread_mutex_unlock(&info->times_eaten_lock);
-	return (TRUE);
-}
-
-static int	check_dead(t_info *info)
-{
-	int	i;
-
-	i = 0;
-	pthread_mutex_lock(&info->times_eaten_lock);
-	while (i < info->num_philos)
-	{
-		if (gettime(info) - info->philos[i].time_last_eaten
-			>= info->time_to_die)
-		{
-			pthread_mutex_lock(&info->finished_lock);
-			info->died = TRUE;
-			pthread_mutex_unlock(&info->finished_lock);
-			print_message(info, DIED, RED, i);
-			pthread_mutex_unlock(&info->times_eaten_lock);
-			return (TRUE);
-		}
-		i ++;
-	}
-	pthread_mutex_unlock(&info->times_eaten_lock);
-	return (FALSE);
 }
 
 static void	end_game(t_info *info)

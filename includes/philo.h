@@ -6,7 +6,7 @@
 /*   By: cschmied <cschmied@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/22 16:00:08 by cschmied          #+#    #+#             */
-/*   Updated: 2023/04/22 19:18:21 by cschmied         ###   ########.fr       */
+/*   Updated: 2023/05/30 21:19:01 by cschmied         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define USAGE "Usage: ./philo number_of_philosophers time_to_die time_to_eat time_to_sleep [number_of_times_each_philosopher_must_eat]\n"
 # define ERROR_INPUT "ERROR: argument must be positive integer.\n"
 
-# define WAIT_INTERVAL 5
+# define WAIT_INTERVAL 150
 
 # include <pthread.h>
 # include <unistd.h>
@@ -36,6 +36,9 @@
 
 void	*philo(void *arg);
 int		join_threads(t_info *info);
+int		check_state(t_info *info);
+int		check_count_eaten(t_info *info);
+int		check_dead(t_info *info);
 
 # define RED     "\x1b[31m"
 # define GREEN   "\x1b[32m"

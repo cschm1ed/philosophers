@@ -18,7 +18,7 @@ void	print_message(t_info *info, const char *msg, char* color, int pos)
 	if (info->died == FALSE || *msg == 'd')
 	{
 		pthread_mutex_lock(&info->print_lock);
-		printf("%s %lu %d %s %s\n", color, gettime(info), pos + 1, msg, RESET);
+		printf("%s%lu %d %s%s\n", color, gettime(info), pos + 1, msg, RESET);
 		pthread_mutex_unlock(&info->print_lock);
 	}
 	pthread_mutex_unlock(&info->finished_lock);

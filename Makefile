@@ -16,7 +16,7 @@ BUILDDIR	:= build
 UTILS		:= ft_putstr.c ft_atoi.c ft_calloc.c ft_wait.c print_messages.c \
 				free_resources.c
 
-SRCS		:= main.c philo.c info_init.c ft_gettime.c $(UTILS)
+SRCS		:= main.c philo.c info_init.c ft_gettime.c check_state.c $(UTILS)
 
 OBJS		:= $(SRCS:%.c=$(BUILDDIR)/%.o)
 
